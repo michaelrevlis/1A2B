@@ -1,26 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="P7b-81-sPV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Game Play View Controller-->
+        <scene sceneID="1kb-Qd-130">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="_A2B" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P7b-81-sPV" customClass="GamePlayViewController" customModule="_A2B" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="rlU-Zc-7pK"/>
+                        <viewControllerLayoutGuide type="bottom" id="qFT-9v-vm3"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="Wcj-PB-X3L">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vG-DG-wuW">
+                                <rect key="frame" x="252" y="28" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="dls-zK-mXn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="inputTextFieldPressed:" destination="P7b-81-sPV" eventType="editingDidBegin" id="kz1-K6-zWX"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gY-Ge-bXv">
+                                <rect key="frame" x="252" y="78" width="97" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1gY-Ge-bXv" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="0qT-hF-uU9"/>
+                            <constraint firstItem="1gY-Ge-bXv" firstAttribute="top" secondItem="2vG-DG-wuW" secondAttribute="bottom" constant="20" id="2XH-St-6NK"/>
+                            <constraint firstItem="2vG-DG-wuW" firstAttribute="top" secondItem="rlU-Zc-7pK" secondAttribute="bottom" constant="8" symbolic="YES" id="2js-9k-sIr"/>
+                            <constraint firstItem="1gY-Ge-bXv" firstAttribute="leading" secondItem="2vG-DG-wuW" secondAttribute="leading" id="TW4-M9-XIs"/>
+                            <constraint firstItem="2vG-DG-wuW" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="vWf-Ta-O0P"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="inputTextField" destination="2vG-DG-wuW" id="fnO-wN-2k6"/>
+                        <outlet property="outputLabel" destination="1gY-Ge-bXv" id="tPB-Qm-WdI"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qSc-4S-q8i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="96" y="120"/>
         </scene>
     </scenes>
 </document>
