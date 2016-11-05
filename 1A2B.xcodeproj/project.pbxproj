@@ -15,6 +15,7 @@
 		6B056ACF1DCD921C0045AD55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B056ACE1DCD921C0045AD55 /* GoogleService-Info.plist */; };
 		6B056AD11DCD99BF0045AD55 /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B056AD01DCD99BF0045AD55 /* GamePlayViewController.swift */; };
 		6B056AD31DCDBF1F0045AD55 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B056AD21DCDBF1F0045AD55 /* GameLogic.swift */; };
+		6BEF678D1DCE3FCB00F0327A /* RobotPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF678C1DCE3FCB00F0327A /* RobotPlayer.swift */; };
 		AC9EF41D6D7E1009052B2937 /* Pods_1A2B.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40DD76B3F09F22866AC16F5E /* Pods_1A2B.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		6B056ACE1DCD921C0045AD55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6B056AD01DCD99BF0045AD55 /* GamePlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
 		6B056AD21DCDBF1F0045AD55 /* GameLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		6BEF678C1DCE3FCB00F0327A /* RobotPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotPlayer.swift; sourceTree = "<group>"; };
 		E33A3554A15377125029EAD0 /* Pods-1A2B.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-1A2B.release.xcconfig"; path = "Pods/Target Support Files/Pods-1A2B/Pods-1A2B.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 				6B056AD01DCD99BF0045AD55 /* GamePlayViewController.swift */,
 				6B056AD21DCDBF1F0045AD55 /* GameLogic.swift */,
 				6B056ABD1DCD8D850045AD55 /* Main.storyboard */,
+				6BEF678C1DCE3FCB00F0327A /* RobotPlayer.swift */,
 				6B056AC31DCD8D850045AD55 /* Assets.xcassets */,
 				6B056AC51DCD8D850045AD55 /* LaunchScreen.storyboard */,
 				6B056AC81DCD8D850045AD55 /* Info.plist */,
@@ -229,6 +232,7 @@
 				6B056ABA1DCD8D850045AD55 /* AppDelegate.swift in Sources */,
 				6B056AC21DCD8D850045AD55 /* _A2B.xcdatamodeld in Sources */,
 				6B056AD31DCDBF1F0045AD55 /* GameLogic.swift in Sources */,
+				6BEF678D1DCE3FCB00F0327A /* RobotPlayer.swift in Sources */,
 				6B056AD11DCD99BF0045AD55 /* GamePlayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
