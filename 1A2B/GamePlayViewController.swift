@@ -17,21 +17,25 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     }
     
     private var inputNumbers = String()
-    private var answer = String()
-
+    private var result = String()
+    private var checkBool = Bool()
+// 去寫robot的class，用object的觀念
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.inputTextField.keyboardType = UIKeyboardType.NumberPad
-
+        self.inputTextField.keyboardAppearance = UIKeyboardAppearance.Dark
+        
         inputTextField.delegate = self
         
-        answer = "(Answer)"
+        result = "(Answer)"
         
-        outputLabel.text = answer
+        outputLabel.text = result
         outputLabel.textAlignment = .Center
         
+        
+        // 點擊其他地方視為結束輸入，回傳key in的資料、隱藏keyboard
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: #selector(GamePlayViewController.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
@@ -40,65 +44,42 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     func didTapView(){
         self.view.endEditing(true)
     }
+
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        inputTextField.becomeFirstResponder()
+    }
+    
+    
+
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         
         let newLength = text.characters.count + string.characters.count - range.length
+        
         return newLength <= 4
     }
     
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-//        
-//        return true
-//    }
-//    
-//    func textFieldDidBeginEditing(textField: UITextField) {
-//        
-//    }
+    
+    
     
     func textFieldDidEndEditing(textField: UITextField) {
         
-        answer = calculate(textField.text!)
+        result = matchAnswer(input: textField.text!, answer: "1234")
+        print(textField.text)
         
-        outputLabel.text = answer
+        outputLabel.text = result
         
         textField.text = nil
+        
+        inputTextField.becomeFirstResponder()
     }
     
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        
-//        return true
-//    }
     
     
-    func calculate(input: String) -> String {
-        
-        let answer = "1234".characters
-        var temp = answer
-        
-        var bothCorrect = Int()
-        var numberCorrect = Int()
-        
-        input.characters.forEach() { latter in
 
-            if latter == temp.first {
-                
-                bothCorrect += 1
-
-            } else if answer.contains(latter) {
-                
-                numberCorrect += 1
-                
-            }
-            
-            temp = temp.dropFirst()
-        }
-        
-        
-        return "\(bothCorrect)A\(numberCorrect)B"
-        
-    }
     
 }
