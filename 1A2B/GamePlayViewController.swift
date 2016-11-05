@@ -32,14 +32,14 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         outputLabel.text = answer
         outputLabel.textAlignment = .Center
         
-//        let tapRecognizer = UITapGestureRecognizer()
-//        tapRecognizer.addTarget(self, action: #selector(GamePlayViewController.didTapView))
-//        self.view.addGestureRecognizer(tapRecognizer)
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.addTarget(self, action: #selector(GamePlayViewController.didTapView))
+        self.view.addGestureRecognizer(tapRecognizer)
     }
     
-//    func didTapView(){
-//        self.view.endEditing(true)
-//    }
+    func didTapView(){
+        self.view.endEditing(true)
+    }
     
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -59,32 +59,42 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
 //    }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        outputLabel.text = textField.text
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         answer = calculate(textField.text!)
         
-        textField.text = nil
+        outputLabel.text = answer
         
-        return true
+        textField.text = nil
     }
+    
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        
+//        return true
+//    }
     
     
     func calculate(input: String) -> String {
         
         let answer = "1234".characters
+        var temp = answer
         
         var bothCorrect = Int()
         var numberCorrect = Int()
         
-        if input.characters.elementsEqual(answer) {
-            return "4A"
+        input.characters.forEach() { latter in
+
+            if latter == temp.first {
+                
+                bothCorrect += 1
+
+            } else if answer.contains(latter) {
+                
+                numberCorrect += 1
+                
+            }
+            
+            temp = temp.dropFirst()
         }
-        
-//        if input.characters.ele
-        
         
         
         return "\(bothCorrect)A\(numberCorrect)B"
