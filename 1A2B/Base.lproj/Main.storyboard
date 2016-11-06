@@ -17,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vG-DG-wuW">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vG-DG-wuW">
                                 <rect key="frame" x="252" y="87" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="dls-zK-mXn"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="inputTextFieldPressed:" destination="P7b-81-sPV" eventType="editingDidBegin" id="kz1-K6-zWX"/>
@@ -31,13 +31,19 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gY-Ge-bXv">
                                 <rect key="frame" x="279" y="137" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVm-ai-3cZ">
                                 <rect key="frame" x="279" y="50" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNN-3b-T26">
+                                <rect key="frame" x="359" y="102" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -47,9 +53,11 @@
                             <constraint firstItem="1gY-Ge-bXv" firstAttribute="top" secondItem="2vG-DG-wuW" secondAttribute="bottom" constant="20" id="2XH-St-6NK"/>
                             <constraint firstItem="2vG-DG-wuW" firstAttribute="top" secondItem="rlU-Zc-7pK" secondAttribute="bottom" constant="8" symbolic="YES" id="2js-9k-sIr"/>
                             <constraint firstItem="2vG-DG-wuW" firstAttribute="top" secondItem="pVm-ai-3cZ" secondAttribute="bottom" constant="16" id="51K-jJ-DiT"/>
+                            <constraint firstItem="dNN-3b-T26" firstAttribute="centerY" secondItem="2vG-DG-wuW" secondAttribute="centerY" id="7cf-aK-fu9"/>
                             <constraint firstItem="pVm-ai-3cZ" firstAttribute="top" secondItem="rlU-Zc-7pK" secondAttribute="bottom" constant="30" id="9WK-Na-pJ4"/>
                             <constraint firstItem="pVm-ai-3cZ" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="EG2-Rv-uz8"/>
                             <constraint firstItem="1gY-Ge-bXv" firstAttribute="leading" secondItem="2vG-DG-wuW" secondAttribute="leading" id="TW4-M9-XIs"/>
+                            <constraint firstItem="dNN-3b-T26" firstAttribute="leading" secondItem="2vG-DG-wuW" secondAttribute="trailing" constant="10" id="fV3-9e-ymL"/>
                             <constraint firstItem="2vG-DG-wuW" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="vWf-Ta-O0P"/>
                         </constraints>
                         <variation key="default">
@@ -60,6 +68,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="errorDescription" destination="dNN-3b-T26" id="ZIY-da-jHZ"/>
                         <outlet property="gameDescription" destination="pVm-ai-3cZ" id="bWh-SS-94s"/>
                         <outlet property="inputTextField" destination="2vG-DG-wuW" id="fnO-wN-2k6"/>
                         <outlet property="outputLabel" destination="1gY-Ge-bXv" id="tPB-Qm-WdI"/>

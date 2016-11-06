@@ -48,6 +48,40 @@ func answerGenerator() -> String {
 
 
 
+typealias AnswerTypeCorrect = () -> Void
+typealias AnswerTypeIncorrect = (error: AnswerTypeError) -> Void
+
+enum AnswerTypeError: ErrorType {
+    case LessThan4, DuplicateNumber
+}
+
+func checkAnswerType(currentText: String, correct: AnswerTypeCorrect?, incorrect: AnswerTypeIncorrect?) -> Void {
+    
+    guard currentText.characters.count == 4
+        else {
+            incorrect?(error: .LessThan4)
+            return
+    }
+    
+    var tempText = currentText.characters
+    
+    for _ in 1...3 {
+        
+        let character = tempText.first
+        
+        tempText = tempText.dropFirst()
+        
+        if tempText.contains(character!) {
+            
+            incorrect?(error: .DuplicateNumber)
+            return
+        }
+    }
+    
+    correct?()
+    
+}
+
 
 
 
