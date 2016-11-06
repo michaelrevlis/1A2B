@@ -88,9 +88,9 @@
 			children = (
 				6B056ACE1DCD921C0045AD55 /* GoogleService-Info.plist */,
 				6B056AB91DCD8D850045AD55 /* AppDelegate.swift */,
+				6B056ABD1DCD8D850045AD55 /* Main.storyboard */,
 				6B056AD01DCD99BF0045AD55 /* GamePlayViewController.swift */,
 				6B056AD21DCDBF1F0045AD55 /* GameLogic.swift */,
-				6B056ABD1DCD8D850045AD55 /* Main.storyboard */,
 				6BEF678C1DCE3FCB00F0327A /* RobotPlayer.swift */,
 				6B056AC31DCD8D850045AD55 /* Assets.xcassets */,
 				6B056AC51DCD8D850045AD55 /* LaunchScreen.storyboard */,

@@ -32,10 +32,10 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         
         inputTextField.delegate = self
         
-        descriptions = "Are you ready? Enter your first guess below."
+        descriptions = "Are you ready? \n Enter your first guess below."
         gameDescription.text = descriptions
         
-        guessingResult = "Here's your guessing result."
+        guessingResult = "Here're your guessing results:"
         outputLabel.text = guessingResult
         outputLabel.textColor = UIColor.lightGrayColor()
         
@@ -47,6 +47,7 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
+    
     func didTapView(){
         self.view.endEditing(true)
     }
@@ -57,7 +58,6 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         
         inputTextField.becomeFirstResponder()
     }
-    
     
 
     
@@ -74,9 +74,10 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         
-        guessingResult = matchAnswer(input: textField.text!, answer: "1234")
+        let theResult = matchAnswer(input: textField.text!, answer: answer)
         print(textField.text)
         
+        guessingResult += "\n \(textField.text!) \(theResult)"
         outputLabel.text = guessingResult
         
         textField.text = nil
