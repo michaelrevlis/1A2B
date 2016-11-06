@@ -12,12 +12,15 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var outputLabel: UILabel!
+    @IBOutlet weak var gameDescription: UILabel!
+    
     
     @IBAction func inputTextFieldPressed(sender: AnyObject) {
     }
     
     private var inputNumbers = String()
-    private var result = String()
+    private var guessingResult = String()
+    private var descriptions = String()
     private var checkBool = Bool()
 // 去寫robot的class，用object的觀念
 
@@ -25,14 +28,15 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         self.inputTextField.keyboardType = UIKeyboardType.NumberPad
-        self.inputTextField.keyboardAppearance = UIKeyboardAppearance.Dark
         
         inputTextField.delegate = self
         
-        result = "(Answer)"
+        descriptions = "Are you ready? Enter your first guess below."
+        gameDescription.text = descriptions
         
-        outputLabel.text = result
-        outputLabel.textAlignment = .Center
+        guessingResult = "Here's your guessing result."
+        outputLabel.text = guessingResult
+        outputLabel.textColor = UIColor.lightGrayColor()
         
         
         // 點擊其他地方視為結束輸入，回傳key in的資料、隱藏keyboard
@@ -68,10 +72,10 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         
-        result = matchAnswer(input: textField.text!, answer: "1234")
+        guessingResult = matchAnswer(input: textField.text!, answer: "1234")
         print(textField.text)
         
-        outputLabel.text = result
+        outputLabel.text = guessingResult
         
         textField.text = nil
         

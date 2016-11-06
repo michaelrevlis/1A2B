@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vG-DG-wuW">
-                                <rect key="frame" x="252" y="28" width="97" height="30"/>
+                                <rect key="frame" x="252" y="87" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="dls-zK-mXn"/>
                                 </constraints>
@@ -28,8 +28,14 @@
                                     <action selector="inputTextFieldPressed:" destination="P7b-81-sPV" eventType="editingDidBegin" id="kz1-K6-zWX"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gY-Ge-bXv">
-                                <rect key="frame" x="252" y="78" width="97" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gY-Ge-bXv">
+                                <rect key="frame" x="252" y="137" width="97" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVm-ai-3cZ">
+                                <rect key="frame" x="279" y="50" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,11 +46,20 @@
                             <constraint firstItem="1gY-Ge-bXv" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="0qT-hF-uU9"/>
                             <constraint firstItem="1gY-Ge-bXv" firstAttribute="top" secondItem="2vG-DG-wuW" secondAttribute="bottom" constant="20" id="2XH-St-6NK"/>
                             <constraint firstItem="2vG-DG-wuW" firstAttribute="top" secondItem="rlU-Zc-7pK" secondAttribute="bottom" constant="8" symbolic="YES" id="2js-9k-sIr"/>
+                            <constraint firstItem="2vG-DG-wuW" firstAttribute="top" secondItem="pVm-ai-3cZ" secondAttribute="bottom" constant="16" id="51K-jJ-DiT"/>
+                            <constraint firstItem="pVm-ai-3cZ" firstAttribute="top" secondItem="rlU-Zc-7pK" secondAttribute="bottom" constant="30" id="9WK-Na-pJ4"/>
+                            <constraint firstItem="pVm-ai-3cZ" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="EG2-Rv-uz8"/>
                             <constraint firstItem="1gY-Ge-bXv" firstAttribute="leading" secondItem="2vG-DG-wuW" secondAttribute="leading" id="TW4-M9-XIs"/>
                             <constraint firstItem="2vG-DG-wuW" firstAttribute="centerX" secondItem="Wcj-PB-X3L" secondAttribute="centerX" id="vWf-Ta-O0P"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2js-9k-sIr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="gameDescription" destination="pVm-ai-3cZ" id="bWh-SS-94s"/>
                         <outlet property="inputTextField" destination="2vG-DG-wuW" id="fnO-wN-2k6"/>
                         <outlet property="outputLabel" destination="1gY-Ge-bXv" id="tPB-Qm-WdI"/>
                     </connections>
