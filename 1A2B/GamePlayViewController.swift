@@ -22,6 +22,7 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     private var guessingResult = String()
     private var descriptions = String()
     private var checkBool = Bool()
+    private var answer = String()
 // 去寫robot的class，用object的觀念
 
     override func viewDidLoad() {
@@ -38,6 +39,7 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         outputLabel.text = guessingResult
         outputLabel.textColor = UIColor.lightGrayColor()
         
+        answer = answerGenerator()
         
         // 點擊其他地方視為結束輸入，回傳key in的資料、隱藏keyboard
         let tapRecognizer = UITapGestureRecognizer()

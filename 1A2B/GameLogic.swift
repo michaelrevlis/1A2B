@@ -35,3 +35,41 @@ func matchAnswer(input input: String, answer: String) -> String {
     return "\(bothCorrect)A\(numberCorrect)B"
     
 }
+
+
+
+func answerGenerator() -> String {
+    
+    let numbers = [1,2,3,4,5,6,7,8,9,0]
+    
+    return numbers.randomSelect()
+    
+}
+
+
+
+
+
+
+extension Array {
+    
+    func randomSelect() -> String {
+        
+        var matrix = self
+        var pickedNumbers = String()
+        
+        for _ in 1...4 {
+            
+            let index = Int(arc4random_uniform(UInt32(matrix.count)))
+            
+            pickedNumbers += "\(matrix[index])"
+            
+            matrix.removeAtIndex(index)
+            
+        }
+        
+        return pickedNumbers
+        
+    }
+    
+}
