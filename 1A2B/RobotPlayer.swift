@@ -9,6 +9,7 @@
 import Foundation
 
 
+// 去寫robot的class，用object的觀念
 class RobotPlayer {
     
     let name: String

@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
-class GamePlayViewController: UIViewController, UITextFieldDelegate {
+class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var gameDescription: UILabel!
     @IBOutlet weak var errorDescription: UILabel!
     @IBOutlet weak var replayButton: UIButton!
+    @IBOutlet weak var timeKeepCounting: UILabel!
+    @IBOutlet weak var lastSubmitTime: UILabel!
+    @IBOutlet weak var historyRecordsAve: UILabel!
     
     
     @IBAction func inputTextFieldPressed(sender: AnyObject) {
@@ -31,10 +35,17 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     private var answer = String()
     private let returnButton = UIButton(type: UIButtonType.Custom)
     private var submitTimes: Int = 0
-// 去寫robot的class，用object的觀念
+    private var timer = NSTimer()
+    private var timeCount: Double = 0
+    private var historyRecords: [Double] = [] // records from history, used to get last 10 records
+    private var last10records: [Double] = []
+    var gamePlayTime: [Double] = [] // records start from today's game play
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        getLast10Records()
 
         inputTextField.delegate = self
         
@@ -44,11 +55,30 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
                 
         playNewGame()
         
+        timeKeepCounting.hidden = true
+        lastSubmitTime.hidden = true
+        
+        updateAverage(last10records)
+        
         // 點擊其他地方視為結束輸入，回傳key in的資料、隱藏keyboard
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: #selector(GamePlayViewController.didTapView))
         self.view.addGestureRecognizer(tapRecognizer)
     }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        inputTextField.becomeFirstResponder()
+    }
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        let appDelegate = AppDelegate()
+        appDelegate.saveGamePlayTime(gamePlayTime)
+    }
+    
     
     
     func didTapView(){
@@ -69,13 +99,6 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     func Go(sender: UIButton) {
         didTapView()
     }
-
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        inputTextField.becomeFirstResponder()
-    }
-    
 
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -115,25 +138,33 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
                 self.submitTimes += 1
                 
                 switch self.submitTimes {
+                    
                 case 1:
                     self.gameDescription.text = "GAME START!!"
+                    self.startCountingTime()
                     break
+                    
                 case 5:
                     self.gameDescription.text = "Keep on going! \nYou're almost there"
                     break
+                    
                 case 8:
                     self.gameDescription.text = "Wanna give up? \nCome on you can do this"
                     break
+                    
                 case 12:
                     self.gameDescription.text = "You should practice more..."
-                    self.replayButton.hidden = false
                     return
+                    
                 default: break
                 }
                 
+                self.updateSubmitTime()
+                
                 if theResult == "4A0B" {
                     self.gameDescription.text = "You WIN! \n Congratulation"
-                    self.replayButton.hidden = false
+                    self.stopTime()
+                    self.updateGamePlayTime(self.timeCount)
                 }
                 
             },
@@ -190,11 +221,105 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
         answer = answerGenerator()
         print("answer: \(answer)")
         
-        replayButton.hidden = true
-
         inputTextField.becomeFirstResponder()
+        
+        submitTimes = 0
 
+        resetTime()
     }
 
     
+    func startCountingTime() {
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(GamePlayViewController.updateTime), userInfo: nil, repeats: true)
+        timeKeepCounting.hidden = false
+        lastSubmitTime.hidden = false
+    }
+    
+    
+    func updateTime() {
+        timeCount += 0.01
+        timeCount = Double(round(1000*timeCount)/1000)
+        timeKeepCounting.text = "\(timeCount)"
+    }
+    
+    func updateSubmitTime() {
+        lastSubmitTime.text = "\(timeCount)"
+    }
+    
+    func stopTime() {
+        timer.invalidate()
+        timeKeepCounting.text = "\(timeCount)"
+        lastSubmitTime.text = "\(timeCount)"
+    }
+    
+    func resetTime() {
+        timer.invalidate()
+        timeCount = 0
+        timeKeepCounting.text = "\(timeCount)"
+        timeKeepCounting.hidden = true
+        lastSubmitTime.hidden = true
+    }
+    
+    
+    func getLast10Records() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "GamePlayTimeRecords")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(request) as! [GamePlayTimeRecords]
+            
+            for result in results {
+                guard let record = result.record as? Double
+                    else {
+                        continue
+                }
+                self.historyRecords.append(record)
+            }
+            
+        } catch {
+            return
+        }
+        
+        let offset = max(historyRecords.count - 10, 0)
+        var temp = historyRecords
+        
+        guard offset != 0
+        else {
+            last10records = historyRecords
+            return
+        }
+        
+        for _ in 1...offset {
+            last10records.append(temp.last!)
+            temp.removeLast(1)
+        }
+    }
+    
+    
+    func updateGamePlayTime(newRecord: Double) {
+        
+        self.gamePlayTime.append(newRecord)
+        
+        guard self.last10records.count >= 10
+            else {
+                self.last10records.append(newRecord)
+                updateAverage(self.last10records)
+                return
+        }
+        
+        self.last10records.removeAtIndex(0)
+        self.last10records.append(newRecord)
+        updateAverage(self.last10records)
+    }
+
+    
+    func updateAverage(last10: [Double]) {
+        let sum = last10records.reduce(0, combine: +)
+        let ave = round( (sum / Double(last10records.count) * 1000) / 1000)
+        historyRecordsAve.text = "Ave. time of last 10 \nplays : \(ave) sec"
+    }
 }
