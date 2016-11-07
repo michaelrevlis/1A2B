@@ -15,6 +15,6 @@
 "Duplicate number!" = "輸入數字重複!";
 "Are you ready? \n Enter your first guess below." = "準備好了嗎？\n 直接輸入數字開始吧";
 "Here're your guessing results:" = "您的猜測結果如下:";
-"Ave. time of last 10 \nplays :" = "近十次平均遊戲時間 : \n";
+"Ave. time of last 10 \nplays :" = "近十次平均遊戲時間\n";
 "sec" = "秒";
 "Replay" = "重新開始";
