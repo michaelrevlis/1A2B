@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  1A2B
+
+  Created by MichaelRevlis on 2016/11/7.
+  Copyright © 2016年 MichaelRevlis. All rights reserved.
+*/
+
+"GAME START!!" = "計時開始！！";
+"Keep on going! \nYou're almost there" = "喔唷～好像快猜到囉";
+"Wanna give up? \nCome on you can do this" = "已經想放棄了嗎？太早了吧！";
+"You should practice more..." = "回去多練習一下吧...";
+"You WIN! \n Congratulation" = "你猜對了！恭喜";
+"Less than 4 numbers!" = "少於四位數字!";
+"Duplicate number!" = "輸入數字重複!";
+"Are you ready? \n Enter your first guess below." = "準備好了嗎？\n 直接輸入數字開始吧";
+"Here're your guessing results:" = "您的猜測結果如下:";
+"Ave. time of last 10 \nplays :" = "近十次平均遊戲時間 : \n";
+"sec" = "秒";
+"Replay" = "重新開始";

@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  1A2B
+
+  Created by MichaelRevlis on 2016/11/7.
+  Copyright © 2016年 MichaelRevlis. All rights reserved.
+*/
+
+"GAME START!!" = "GAME START!!";
+"Keep on going! \nYou're almost there" = "Keep on going! \nYou're almost there";
+"Wanna give up? \nCome on you can do this" = "Wanna give up? \nCome on you can do this";
+"You should practice more..." = "You should practice more...";
+"You WIN! \n Congratulation" = "You WIN! \n Congratulation";
+"Less than 4 numbers!" = "Less than 4 numbers!";
+"Duplicate number!" = "Duplicate number!";
+"Are you ready? \n Enter your first guess below." = "Are you ready? \n Enter your first guess below.";
+"Here're your guessing results:" = "Here're your guessing results:";
+"Ave. time of last 10 \nplays :" = "Ave. time of last 10 \nplays :";
+"sec" = "sec";
+"Replay" = "Replay";

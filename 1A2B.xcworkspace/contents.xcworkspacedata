@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <Group
-      location = "container:"
-      name = "CoreData">
-      <FileRef
-         location = "group:GamePlayTimeRecords+CoreDataProperties.swift">
-      </FileRef>
-      <FileRef
-         location = "group:GamePlayTimeRecords.swift">
-      </FileRef>
-   </Group>
    <FileRef
       location = "group:1A2B.xcodeproj">
    </FileRef>

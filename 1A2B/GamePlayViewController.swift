@@ -55,7 +55,10 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 
         playNewGame()
         
+        replayButton.setTitle(NSLocalizedString("Replay", comment: "Replay"), forState: .Normal)
+        
         timeKeepCounting.hidden = true
+        
         lastSubmitTime.hidden = true
         
         updateAverage(last10records)
@@ -140,20 +143,20 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 switch self.submitTimes {
                     
                 case 1:
-                    self.gameDescription.text = "GAME START!!"
+                    self.gameDescription.text = NSLocalizedString("GAME START!!", comment: "GAME START!!")
                     self.startCountingTime()
                     break
                     
                 case 5:
-                    self.gameDescription.text = "Keep on going! \nYou're almost there"
+                    self.gameDescription.text = NSLocalizedString("Keep on going! \nYou're almost there", comment: "Keep on going! \nYou're almost there")
                     break
                     
                 case 8:
-                    self.gameDescription.text = "Wanna give up? \nCome on you can do this"
+                    self.gameDescription.text = NSLocalizedString("Wanna give up? \nCome on you can do this", comment: "Wanna give up? \nCome on you can do this")
                     break
                     
                 case 12:
-                    self.gameDescription.text = "You should practice more..."
+                    self.gameDescription.text = NSLocalizedString("You should practice more...", comment: "You should practice more...")
                     return
                     
                 default: break
@@ -162,7 +165,7 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 self.updateSubmitTime()
                 
                 if theResult == "4A0B" {
-                    self.gameDescription.text = "You WIN! \n Congratulation"
+                    self.gameDescription.text = NSLocalizedString("You WIN! \n Congratulation", comment: "You WIN! \n Congratulation")
                     self.stopTime()
                     self.updateGamePlayTime(self.timeCount)
                 }
@@ -174,13 +177,13 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 switch error {
                 
                 case .LessThan4:
-                    self.errorDescription.text = "Less than 4 numbers!"
+                    self.errorDescription.text = NSLocalizedString("Less than 4 numbers!", comment: "Less than 4 numbers!")
                     self.inputTextField.text = nil
                     self.inputTextField.becomeFirstResponder()
                     break
                     
                 case .DuplicateNumber:
-                    self.errorDescription.text = "Duplicate number!"
+                    self.errorDescription.text = NSLocalizedString("Duplicate number!", comment: "Duplicate number!")
                     self.inputTextField.text = nil
                     self.inputTextField.becomeFirstResponder()
                     break
@@ -212,10 +215,10 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     
     func playNewGame() {
         
-        descriptions = "Are you ready? \n Enter your first guess below."
+        descriptions = NSLocalizedString("Are you ready? \n Enter your first guess below.", comment: "Are you ready? \n Enter your first guess below.")
         gameDescription.text = descriptions
         
-        guessingResult = "Here're your guessing results:"
+        guessingResult = NSLocalizedString("Here're your guessing results:", comment: "Here're your guessing results:")
         outputLabel.text = guessingResult
 
         answer = answerGenerator()
@@ -320,6 +323,6 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     func updateAverage(last10: [Double]) {
         let sum = last10records.reduce(0, combine: +)
         let ave = round( (sum / Double(last10records.count) * 1000) / 1000)
-        historyRecordsAve.text = "Ave. time of last 10 \nplays : \(ave) sec"
+        historyRecordsAve.text = NSLocalizedString("Ave. time of last 10 \nplays :", comment: "Ave. time of last 10 \nplays :") + " \(ave) " + NSLocalizedString("sec", comment: "sec")
     }
 }
