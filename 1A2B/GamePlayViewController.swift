@@ -14,10 +14,15 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var outputLabel: UILabel!
     @IBOutlet weak var gameDescription: UILabel!
     @IBOutlet weak var errorDescription: UILabel!
+    @IBOutlet weak var replayButton: UIButton!
     
     
     @IBAction func inputTextFieldPressed(sender: AnyObject) {
     }
+    @IBAction func replayButtonPressed(sender: AnyObject) {
+        playNewGame()
+    }
+    
     
     private var inputNumbers = String()
     private var guessingResult = String()
@@ -25,6 +30,7 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     private var checkBool = Bool()
     private var answer = String()
     private let returnButton = UIButton(type: UIButtonType.Custom)
+    private var submitTimes: Int = 0
 // 去寫robot的class，用object的觀念
 
     override func viewDidLoad() {
@@ -32,16 +38,11 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
 
         inputTextField.delegate = self
         
-        descriptions = "Are you ready? \n Enter your first guess below."
-        gameDescription.text = descriptions
-        
-        guessingResult = "Here're your guessing results:"
-        outputLabel.text = guessingResult
-        outputLabel.textColor = UIColor.lightGrayColor()
-        
-        answer = answerGenerator()
+        outputLabel.textColor = UIColor.darkGrayColor()
         
         setupReturnButton()
+                
+        playNewGame()
         
         // 點擊其他地方視為結束輸入，回傳key in的資料、隱藏keyboard
         let tapRecognizer = UITapGestureRecognizer()
@@ -111,8 +112,28 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
                 
                 self.inputTextField.becomeFirstResponder()
                 
+                self.submitTimes += 1
+                
+                switch self.submitTimes {
+                case 1:
+                    self.gameDescription.text = "GAME START!!"
+                    break
+                case 5:
+                    self.gameDescription.text = "Keep on going! \nYou're almost there"
+                    break
+                case 8:
+                    self.gameDescription.text = "Wanna give up? \nCome on you can do this"
+                    break
+                case 12:
+                    self.gameDescription.text = "You should practice more..."
+                    self.replayButton.hidden = false
+                    return
+                default: break
+                }
+                
                 if theResult == "4A0B" {
                     self.gameDescription.text = "You WIN! \n Congratulation"
+                    self.replayButton.hidden = false
                 }
                 
             },
@@ -158,6 +179,22 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    func playNewGame() {
+        
+        descriptions = "Are you ready? \n Enter your first guess below."
+        gameDescription.text = descriptions
+        
+        guessingResult = "Here're your guessing results:"
+        outputLabel.text = guessingResult
+
+        answer = answerGenerator()
+        print("answer: \(answer)")
+        
+        replayButton.hidden = true
+
+        inputTextField.becomeFirstResponder()
+
+    }
 
     
 }
