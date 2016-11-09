@@ -5,6 +5,7 @@ It's a small game and a good choice for killing your time.
 # Feature
 1. Challenge yourself with time attack feature.
 2. Easter egg on titile description.
+3. Tap anywhere as you like to submit faster.
 
 # ScreenShot
 ![](https://github.com/michaelrevlis/1A2B/blob/master/screenshot/1A2B_start.png)
