@@ -7,3 +7,4 @@ It's a small game and a good choice for killing your time.
 2. Easter egg on titile description.
 
 # ScreenShot
+![Alt text](1A2B/screenshot/1A2B_start.png?raw=true "game start")
