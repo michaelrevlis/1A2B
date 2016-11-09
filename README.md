@@ -7,4 +7,7 @@ It's a small game and a good choice for killing your time.
 2. Easter egg on titile description.
 
 # ScreenShot
-![Alt text](1A2B/screenshot/1A2B_start.png?raw=true "game start")
+![](https://github.com/michaelrevlis/1A2B/blob/master/screenshot/1A2B_start.png)
+![](https://github.com/michaelrevlis/1A2B/blob/master/screenshot/1A2B_win.png)
+![](https://github.com/michaelrevlis/1A2B/blob/master/screenshot/1A2B_dontgiveup.png)
+![](https://github.com/michaelrevlis/1A2B/blob/master/screenshot/1A2B_practicemore.png)
