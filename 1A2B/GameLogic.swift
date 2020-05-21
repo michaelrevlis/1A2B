@@ -8,15 +8,15 @@
 
 import Foundation
 
-func matchAnswer(input input: String, answer: String) -> String {
+func matchAnswer(input: String, answer: String) -> String {
     
-    let theAnswer = answer.characters
+    let theAnswer = answer
     var temp = theAnswer
     
     var bothCorrect = Int()
     var numberCorrect = Int()
     
-    input.characters.forEach() { latter in
+    input.forEach() { latter in
         
         if latter == temp.first {
             
@@ -28,7 +28,7 @@ func matchAnswer(input input: String, answer: String) -> String {
             
         }
         
-        temp = temp.dropFirst()
+        temp = String(temp.dropFirst())
     }
     
     
@@ -49,31 +49,31 @@ func answerGenerator() -> String {
 
 
 typealias AnswerTypeCorrect = () -> Void
-typealias AnswerTypeIncorrect = (error: AnswerTypeError) -> Void
+typealias AnswerTypeIncorrect = (_ error: AnswerTypeError) -> Void
 
-enum AnswerTypeError: ErrorType {
+enum AnswerTypeError: Error {
     case LessThan4, DuplicateNumber
 }
 
 func checkAnswerType(currentText: String, correct: AnswerTypeCorrect?, incorrect: AnswerTypeIncorrect?) -> Void {
     
-    guard currentText.characters.count == 4
+    guard currentText.count == 4
         else {
-            incorrect?(error: .LessThan4)
+            incorrect?(.LessThan4)
             return
     }
     
-    var tempText = currentText.characters
+    var tempText = currentText
     
     for _ in 1...3 {
         
         let character = tempText.first
         
-        tempText = tempText.dropFirst()
+        tempText = String(tempText.dropFirst())
         
         if tempText.contains(character!) {
             
-            incorrect?(error: .DuplicateNumber)
+            incorrect?(.DuplicateNumber)
             return
         }
     }
@@ -98,7 +98,7 @@ extension Array {
             
             pickedNumbers += "\(matrix[index])"
             
-            matrix.removeAtIndex(index)
+            matrix.remove(at: index)
             
         }
         

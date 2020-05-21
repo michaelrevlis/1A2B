@@ -33,9 +33,9 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     private var descriptions = String()
     private var checkBool = Bool()
     private var answer = String()
-    private let returnButton = UIButton(type: UIButtonType.Custom)
+    private let returnButton = UIButton(type: .custom)
     private var submitTimes: Int = 0
-    private var timer = NSTimer()
+    private var timer = Timer()
     private var timeCount: Double = 0
     private var historyRecords: [Double] = [] // records from history, used to get last 10 records
     private var last10records: [Double] = []
@@ -49,19 +49,19 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 
         inputTextField.delegate = self
         
-        outputLabel.textColor = UIColor.darkGrayColor()
+        outputLabel.textColor = UIColor.darkGray
         
         setupReturnButton()
                 
         playNewGame()
         
-        replayButton.setTitle(NSLocalizedString("Replay", comment: "Replay"), forState: .Normal)
+        replayButton.setTitle(NSLocalizedString("Replay", comment: "Replay"), for: .normal)
         
-        timeKeepCounting.hidden = true
+        timeKeepCounting.isHidden = true
         
-        lastSubmitTime.hidden = true
+        lastSubmitTime.isHidden = true
         
-        updateAverage(last10records)
+        updateAverage(last10: last10records)
         
         // 點擊其他地方視為結束輸入，回傳key in的資料、隱藏keyboard
         let tapRecognizer = UITapGestureRecognizer()
@@ -70,59 +70,59 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         inputTextField.becomeFirstResponder()
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         let appDelegate = AppDelegate()
-        appDelegate.saveGamePlayTime(gamePlayTime)
+        appDelegate.saveGamePlayTime(playtime: gamePlayTime)
     }
     
     
     
-    func didTapView(){
+    @objc func didTapView(){
         self.view.endEditing(true)
     }
     
     
     func setupReturnButton() {
-        returnButton.setTitle("Go", forState: UIControlState.Normal)
-        returnButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        returnButton.contentHorizontalAlignment = .Center
-        returnButton.frame = CGRectMake(0, 163, self.view.frame.width / 3 , 53)
+        returnButton.setTitle("Go", for: .normal)
+        returnButton.setTitleColor(UIColor.white, for: .normal)
+        returnButton.contentHorizontalAlignment = .center
+        returnButton.frame = CGRect(x: 0, y: 163, width: self.view.frame.width / 3 , height: 53)
         returnButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        returnButton.addTarget(self, action: #selector(GamePlayViewController.Go(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        returnButton.addTarget(self, action: #selector(go(sender:)), for: .touchUpInside)
     }
     
     
-    func Go(sender: UIButton) {
+    @objc func go(sender: UIButton) {
         didTapView()
     }
 
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         
         return newLength <= 4
     }
     
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GamePlayViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         let currentText = textField.text!
         
-        checkAnswerType(currentText,
+        checkAnswerType(currentText: currentText,
             
             correct: {
                 
@@ -167,7 +167,7 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
                 if theResult == "4A0B" {
                     self.gameDescription.text = NSLocalizedString("You WIN! \n Congratulation", comment: "You WIN! \n Congratulation")
                     self.stopTime()
-                    self.updateGamePlayTime(self.timeCount)
+                    self.updateGamePlayTime(newRecord: self.timeCount)
                 }
                 
             },
@@ -197,15 +197,15 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
     
     
     
-    func keyboardWillShow(note : NSNotification) -> Void{
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.returnButton.hidden = false
-            let keyBoardWindow = UIApplication.sharedApplication().windows.last
-            self.returnButton.frame = CGRectMake(0, (keyBoardWindow?.frame.size.height)!-53, self.view.frame.width / 3 , 53)
+    @objc func keyboardWillShow(note : NSNotification) -> Void{
+        DispatchQueue.main.async {
+            self.returnButton.isHidden = false
+            let keyBoardWindow = UIApplication.shared.windows.last
+            self.returnButton.frame = CGRect(x: 0, y: (keyBoardWindow?.frame.size.height)!-53, width: self.view.frame.width / 3 , height: 53)
             keyBoardWindow?.addSubview(self.returnButton)
             keyBoardWindow?.bringSubviewToFront(self.returnButton)
-            UIView.animateWithDuration(((note.userInfo! as NSDictionary).objectForKey(UIKeyboardAnimationCurveUserInfoKey)?.doubleValue)!, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-                self.view.frame = CGRectOffset(self.view.frame, 0, 0)
+            UIView.animate(withDuration: (((note.userInfo! as NSDictionary).object(forKey: UIResponder.keyboardAnimationCurveUserInfoKey) as AnyObject).doubleValue)!, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: { () -> Void in
+                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: 0)
                 }, completion: { (complete) -> Void in
             })
         }
@@ -233,13 +233,13 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
 
     
     func startCountingTime() {
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(GamePlayViewController.updateTime), userInfo: nil, repeats: true)
-        timeKeepCounting.hidden = false
-        lastSubmitTime.hidden = false
+        self.timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        timeKeepCounting.isHidden = false
+        lastSubmitTime.isHidden = false
     }
     
     
-    func updateTime() {
+   @objc func updateTime() {
         timeCount += 0.01
         timeCount = Double(round(1000*timeCount)/1000)
         timeKeepCounting.text = "\(timeCount)"
@@ -259,21 +259,21 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         timer.invalidate()
         timeCount = 0
         timeKeepCounting.text = "\(timeCount)"
-        timeKeepCounting.hidden = true
-        lastSubmitTime.hidden = true
+        timeKeepCounting.isHidden = true
+        lastSubmitTime.isHidden = true
     }
     
     
     func getLast10Records() {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "GamePlayTimeRecords")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "GamePlayTimeRecords")
         
         do {
-            let results = try managedContext.executeFetchRequest(request) as! [GamePlayTimeRecords]
+            let results = try managedContext.fetch(request) as! [GamePlayTimeRecords]
             
             for result in results {
                 guard let record = result.record as? Double
@@ -310,18 +310,18 @@ class GamePlayViewController: UIViewController, UITextFieldDelegate, UIScrollVie
         guard self.last10records.count >= 10
             else {
                 self.last10records.append(newRecord)
-                updateAverage(self.last10records)
+                updateAverage(last10: self.last10records)
                 return
         }
         
-        self.last10records.removeAtIndex(0)
+        self.last10records.remove(at: 0)
         self.last10records.append(newRecord)
-        updateAverage(self.last10records)
+        updateAverage(last10: self.last10records)
     }
 
     
     func updateAverage(last10: [Double]) {
-        let sum = last10records.reduce(0, combine: +)
+        let sum = last10records.reduce(0, +)
         let ave = round( (sum / Double(last10records.count) * 1000) / 1000)
         historyRecordsAve.text = NSLocalizedString("Ave. time of last 10 \nplays :", comment: "Ave. time of last 10 \nplays :") + " \(ave) " + NSLocalizedString("sec", comment: "sec")
     }
